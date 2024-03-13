@@ -24,7 +24,7 @@ Fazer o cadastro do cliente. Ao selecionar a opção serão pedidos os seguintes
 
 */
 
-string opcao;
+string? opcao;
 
 List<string[]> clientes = new List<string[]>();
 
@@ -40,6 +40,7 @@ while (true)
     3 - Fazer depósito em conta
     4 - Fazer saque da conta
     5 - Sair do sistema
+    6 - Mostrar clientes cadastrados
     """);
 
     opcao = Console.ReadLine();
@@ -48,28 +49,7 @@ while (true)
     {
         case "1":
             //Console.Clear();
-            Console.WriteLine("Cadastro de cliente:");
-
-            string[] cliente = new string[4];
-
-            cliente[0] = Guid.NewGuid().ToString();
-
-            Console.WriteLine("Nome completo");
-            cliente[1] = Console.ReadLine();
-
-            Console.WriteLine("Telefone");
-            cliente[2] = Console.ReadLine();
-
-            Console.WriteLine("E-mail");
-            cliente[3] = Console.ReadLine();
-
-            clientes.Add(cliente);
-
-            foreach (var item in clientes)
-            {
-                System.Console.WriteLine(item[0] + ' ' + item[1] + ' ' + item[2] + ' ' + item[3]);
-            }
-
+            cadastrarCliente();
             break;
         case "2":
             //Console.Clear();
@@ -88,10 +68,50 @@ while (true)
             sair = true;
             Console.WriteLine("5");
             break;
+        case "6":
+            mostrarClientes();
+            Thread.Sleep(1500);
+            break;
         default:
             Console.WriteLine("Opção inválida, tente novamente.");
             break;
     }
 
     if (sair) break;
+}
+
+void cadastrarCliente()
+{
+    Console.WriteLine("Cadastro de cliente:");
+
+    string[] cliente = new string[4];
+
+    cliente[0] = Guid.NewGuid().ToString();
+
+    Console.WriteLine("Nome completo");
+    cliente[1] = Console.ReadLine() ?? " ";
+
+    Console.WriteLine("Telefone");
+    cliente[2] = Console.ReadLine() ?? " ";
+
+    Console.WriteLine("E-mail");
+    cliente[3] = Console.ReadLine() ?? " ";
+
+    clientes.Add(cliente);
+    
+    mensagem($"""Cliente {cliente[1]} cadastrado com sucesso!""");
+
+}
+
+void mensagem(string msg)
+{
+    Console.WriteLine(msg);
+}
+
+void mostrarClientes()
+{
+    foreach (var item in clientes)
+    {
+        Console.WriteLine(item[0] +' '+ item[1] +' '+item[2] +' '+item[3]);
+    }
 }
