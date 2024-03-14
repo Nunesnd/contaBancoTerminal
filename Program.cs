@@ -15,18 +15,24 @@ Escolha a opção:
 5 - Sair do sistema
 
 - - - - - - - - - - - - - - - - - - - - - -
-Segunda parte ()
+Segunda parte ( Concluído )
 Fazer o cadastro do cliente. Ao selecionar a opção serão pedidos os seguintes dados do cliente:
 -Id (guid);
 -Nome;
 -Telefone;
 -Email;
 
+- - - - - - - - - - - - - - - - - - - - - -
+Terceiro ()
+
+Inserir credito e débito na conta corrente do cliente
+
 */
 
 string? opcao;
 
 List<string[]> clientes = new List<string[]>();
+List<string[]> contaCorrente = new List<string[]>();
 
 bool sair = false;
 
@@ -44,27 +50,30 @@ while (true)
     """);
 
     opcao = Console.ReadLine();
-    //Console.Clear();
+    Console.Clear();
+    
     switch (opcao)
     {
         case "1":
-            //Console.Clear();
+            Console.Clear();
             cadastrarCliente();
             break;
         case "2":
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine("2");
+            consultaContaCorrente();
             break;
         case "3":
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine("3");
+            realizarDeposito();
             break;
         case "4":
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine("4");
             break;
         case "5":
-            //Console.Clear();
+            Console.Clear();
             sair = true;
             Console.WriteLine("5");
             break;
@@ -103,6 +112,15 @@ void cadastrarCliente()
 
 }
 
+void consultaContaCorrente()
+{
+    foreach (var item in contaCorrente)
+    {
+        
+        Console.WriteLine(item[0] +' '+ item[1] +' '+item[2]);
+    }
+}
+
 void mensagem(string msg)
 {
     Console.WriteLine(msg);
@@ -115,3 +133,28 @@ void mostrarClientes()
         Console.WriteLine(item[0] +' '+ item[1] +' '+item[2] +' '+item[3]);
     }
 }
+
+void realizarDeposito()
+{
+    Console.WriteLine("Informe o Id do favorecido: ");
+    mostrarClientes();
+    string? idCliente = Console.ReadLine();
+    
+    foreach (var item in clientes)
+    {
+        if(item[0] == idCliente){
+            string[] conta = new string[3];
+            System.Console.Write("Informe o valor a depositar: R$");
+            double valorDeposito = double.Parse(Console.ReadLine());
+            DateTime hora = DateTime.Now;
+
+            conta[0] = idCliente;
+            conta[1] = valorDeposito.ToString();
+            conta[2] = hora.ToString();
+
+            contaCorrente.Add(conta);
+        }
+    }
+}
+
+// iniciando programa lina
