@@ -160,6 +160,8 @@ void mostrarClientes()
     {
         Console.WriteLine(item[0] + ' ' + item[1] + ' ' + item[2] + ' ' + item[3]);
     }
+
+    Console.WriteLine("-------------------------------------------");
 }
 
 void realizarDeposito()
@@ -175,12 +177,11 @@ void realizarDeposito()
             string[] conta = new string[4];
             Console.Write("Informe o valor a depositar: R$");
             double valorDeposito = double.Parse(Console.ReadLine());
-            DateTime hora = DateTime.Now;
 
             conta[0] = idCliente;
             conta[1] = "C";
             conta[2] = valorDeposito.ToString();
-            conta[3] = hora.ToString();
+            conta[3] = DateTime.Now.ToString("dd/MM/yyyy HH:MM");
 
             contaCorrente.Add(conta);
         }
@@ -200,12 +201,11 @@ void realizarSaque()
             string[] conta = new string[4];
             Console.Write("Informe o valor a sacar: R$");
             double valorDeposito = double.Parse(Console.ReadLine());
-            DateTime hora = DateTime.Now;
 
             conta[0] = idCliente;
             conta[1] = "D";
             conta[2] = valorDeposito.ToString();
-            conta[3] = hora.ToString();
+            conta[3] = DateTime.Now.ToString("dd/MM/yyyy HH:MM");
 
             contaCorrente.Add(conta);
         }
